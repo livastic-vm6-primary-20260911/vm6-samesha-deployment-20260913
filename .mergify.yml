@@ -1,21 +1,15 @@
 pull_request_rules: []
-commands_restrictions:
-  queue:
-    conditions:
-      - sender = livastic-vm6-primary-20260911
-      - number = 5
-
-merge_queue:
-  mode: serial
-  max_parallel_checks: 1
-
-queue_rules:
-  - name: vm6-app-repo-selection-revoke-finalizer-20260928
-    batch_size: 1
-    queue_conditions:
-      - number = 5
-    merge_conditions:
-      - schedule = 13:15-23:59
-    max_checks_retries: 0
-    merge_method: merge
-    checks_timeout: null
+merge_protections:
+  - name: VM6 Deployment Easy
+    if:
+      - head = deployment-easy
+    success_conditions:
+      - base = main
+  - name: VM6 Deployment Strict
+    if:
+      - head = deployment-strict
+    success_conditions:
+      - label = vm6-deployment-required
+merge_protections_settings:
+  reporting_method: deployments
+  post_comment: true

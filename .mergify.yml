@@ -15,7 +15,7 @@ queue_rules:
     queue_conditions:
       - number = 14
     merge_conditions:
-      - schedule = 16:25-16:28
+      - schedule = 16:35-16:38
       - check-success = @github-actions/vm6-schedule-window-delay
     max_checks_retries: 0
     merge_method: merge

@@ -1,0 +1,16 @@
+name: VM6 App Revoke Delay
+on:
+  pull_request:
+
+jobs:
+  vm6-app-revoke-delay:
+    if: startsWith(github.head_ref, 'mergify/merge-queue/')
+    runs-on: ubuntu-latest
+    steps:
+      - name: Hold controlled finalizer window
+        shell: bash
+        run: |
+          set -euo pipefail
+          echo 'controlled installation-revocation finalizer window'
+          sleep 120
+          echo 'delay complete'

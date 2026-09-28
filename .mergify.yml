@@ -1,15 +1,21 @@
 pull_request_rules: []
-merge_protections:
-  - name: VM6 Deployment Easy
-    if:
-      - head = deployment-easy
-    success_conditions:
-      - base = main
-  - name: VM6 Deployment Strict
-    if:
-      - head = deployment-strict
-    success_conditions:
-      - label = vm6-deployment-required
-merge_protections_settings:
-  reporting_method: deployments
-  post_comment: true
+commands_restrictions:
+  queue:
+    conditions:
+      - sender = livastic-vm6-primary-20260911
+      - title = VM6_APP_REVOKE_INFLIGHT_20260928
+
+merge_queue:
+  mode: serial
+  max_parallel_checks: 1
+
+queue_rules:
+  - name: vm6-app-repo-selection-inflight-revoke-20260928
+    batch_size: 1
+    queue_conditions:
+      - title = VM6_APP_REVOKE_INFLIGHT_20260928
+    merge_conditions:
+      - check-success = @github-actions/vm6-app-revoke-delay
+    max_checks_retries: 0
+    merge_method: merge
+    checks_timeout: null

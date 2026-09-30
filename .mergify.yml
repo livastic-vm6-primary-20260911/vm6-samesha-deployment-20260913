@@ -1,4 +1,13 @@
-pull_request_rules: []
+pull_request_rules:
+  - name: VM6 released note alias scope-gate merge 261001
+    conditions:
+      - base = vm6-note-alias-base-261001
+      - title = VM6_NOTE_ALIAS_RELEASED_SCOPES_261001
+      - author = livastic-vm6-primary-20260911
+      - check-success = vm6-note-alias-scope-gate
+    actions:
+      merge:
+        method: merge
 merge_protections:
   - name: VM6 Deployment Easy
     if:

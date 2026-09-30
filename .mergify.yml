@@ -13,3 +13,18 @@ merge_protections:
 merge_protections_settings:
   reporting_method: deployments
   post_comment: true
+
+merge_queue:
+  mode: serial
+  max_parallel_checks: 1
+
+queue_rules:
+  - name: vm6-app-selection-batch-timer-261001
+    batch_size: 2
+    batch_max_wait_time: 1 minute
+    queue_conditions:
+      - title ~= ^VM6_APPSEL_TIMER_(POSITIVE|TREATMENT)_261001$
+    merge_conditions:
+      - check-success = vm6-appsel-never-pass-261001
+    merge_method: merge
+    checks_timeout: null

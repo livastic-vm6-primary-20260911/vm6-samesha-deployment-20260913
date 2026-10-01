@@ -3,7 +3,7 @@ name: VM6 Note Alias Scope Gate
 on:
   pull_request:
     branches:
-      - vm6-note-alias-base-261001
+      - vm6-note-alias-final-base-261001
 
 jobs:
   alias-gate:
